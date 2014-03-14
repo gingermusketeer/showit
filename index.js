@@ -10,12 +10,36 @@ var config = {
 
 var slideshow = remark.create(config);
 
+var pin;
+while (!pin || pin.length < 4){
+  pin = prompt('Enter a slideshow pin longer then 4 characters');
+}
 var shoe = require('shoe');
-var through = require('through');
-
 var result = document.getElementById('result');
 
 var stream = shoe('/slideshow');
-stream.pipe(through(function (slideString) {
-  slideshow.gotoSlide(parseInt(slideString, 10));
-}));
+
+stream.on('connect', function(){
+  stream.write(JSON.stringify({ pin: pin }));
+});
+
+var takeAction = function takeAction(command){
+  switch(command){
+  case 'nextSlide':
+    slideshow.gotoNextSlide();
+    break;
+  case 'previousSlide':
+    slideshow.gotoPreviousSlide();
+    break;
+  default:
+    console.log('Invalid command: ', command);
+  }
+};
+
+stream.on('data', function(data){
+  var object = JSON.parse(data);
+  if(object.command) {
+    takeAction(object.command);
+  }
+  console.log('data', data);
+});

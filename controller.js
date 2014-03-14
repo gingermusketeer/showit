@@ -1,4 +1,3 @@
-var currentSlide = 1;
 var container = document.querySelector('#container');
 
 var shoe = require('shoe');
@@ -7,24 +6,33 @@ var through = require('through');
 var Hammer = require('hammerjs');
 var debounce = require('debounce');
 
+var pin;
+while (!pin || pin.length < 4){
+  pin = prompt('Enter a slideshow pin longer then 4 characters');
+}
 
-var stream = shoe('/controller');
+var stream = shoe('/slideshow');
 
-var sendStreamCurrentSlide = debounce((newSlideNumber) => {
-  currentSlide = newSlideNumber;
-  updateSlide();
-  stream.write(currentSlide);
-}, 200);
+stream.on('connect', function(){
+  stream.write(JSON.stringify({pin}));
+});
+stream.on('data', (data) => {
+  var message = JSON.parse(data);
+  if(message.slide) {
+    currentSlide = slide;
+    updateSlide();
+  }
+});
 
-let updateSlide = () => {
-  container.innerText = currentSlide;
-};
+var sendStreamCurrentSlide = debounce((command) => {
+  stream.write(JSON.stringify({ command }));
+}, 200, true);
 
 let previousSlide = () => {
-  sendStreamCurrentSlide(currentSlide - 1);
+  sendStreamCurrentSlide('previousSlide');
 };
 nextSlide = () => {
-  sendStreamCurrentSlide(currentSlide + 1);
+  sendStreamCurrentSlide('nextSlide');
 };
 
 Hammer(document).on('swipeleft dragleft', () => {
