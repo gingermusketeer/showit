@@ -27,24 +27,12 @@ nextSlide = () => {
   sendStreamCurrentSlide(currentSlide + 1);
 };
 
-Hammer(document).on('swipeleft', () => {
+Hammer(document).on('swipeleft dragleft', () => {
   console.log('swiping left');
   nextSlide();
 });
 
-Hammer(document).on('swiperight', () => {
-  console.log('swiping right');
-  previousSlide();
-});
-
-
-Hammer(document).on('dragleft', () => {
-  console.log('swiping left');
-  nextSlide();
-
-});
-
-Hammer(document).on('dragright', () => {
+Hammer(document).on('swiperight dragright', () => {
   console.log('swiping right');
   previousSlide();
 });
