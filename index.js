@@ -1,3 +1,5 @@
+var stream = shoe('/slideshow');
+var shoe = require('shoe');
 require('remark/src/remark.js');
 var remark = window.remark;
 var fs = require('fs');
@@ -10,20 +12,18 @@ var config = {
 
 var slideshow = remark.create(config);
 
-var pin;
+let pin;
 while (!pin || pin.length < 4){
   pin = prompt('Enter a slideshow pin longer then 4 characters');
 }
-var shoe = require('shoe');
-var result = document.getElementById('result');
 
-var stream = shoe('/slideshow');
+var result = document.getElementById('result');
 
 stream.on('connect', function(){
   stream.write(JSON.stringify({ pin: pin }));
 });
 
-var takeAction = function takeAction(command){
+var takeAction = (command) => {
   switch(command){
   case 'nextSlide':
     slideshow.gotoNextSlide();
@@ -36,7 +36,7 @@ var takeAction = function takeAction(command){
   }
 };
 
-stream.on('data', function(data){
+stream.on('data', (data) => {
   var object = JSON.parse(data);
   if(object.command) {
     takeAction(object.command);

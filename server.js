@@ -1,5 +1,6 @@
 var shoe = require('shoe');
 var browserify = require('browserify');
+var es6ify = require('es6ify');
 var express = require('express');
 var app = express();
 
@@ -8,7 +9,7 @@ app.use(express.static(__dirname));
 app.get('/controller.js', function(req, res){
 
   browserify()
-    .add(require('es6ify').runtime)
+    .add(es6ify.runtime)
     // .transform(require('brfs'))
     .transform(require('es6ify').configure(/^(?!.*node_modules)+.+\.js$/))
     .require(require.resolve('./controller.js'), { entry: true })
@@ -18,6 +19,8 @@ app.get('/controller.js', function(req, res){
 
 app.get('/index.js', function(req, res){
   browserify()
+    .add(es6ify.runtime)
+    .transform(require('es6ify').configure(/^(?!.*node_modules)+.+\.js$/))
     .transform(require('brfs'))
     .require(require.resolve('./index.js'), { entry: true })
     .bundle({ debug: true })

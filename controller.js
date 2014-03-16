@@ -31,7 +31,7 @@ var sendStreamCurrentSlide = debounce((command) => {
 let previousSlide = () => {
   sendStreamCurrentSlide('previousSlide');
 };
-nextSlide = () => {
+let nextSlide = () => {
   sendStreamCurrentSlide('nextSlide');
 };
 
