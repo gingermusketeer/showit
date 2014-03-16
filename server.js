@@ -1,16 +1,14 @@
 var shoe = require('shoe');
-
-var browserify = require('browserify-middleware');
+var browserify = require('browserify');
 var express = require('express');
 var app = express();
 
 app.use(app.router);
 app.use(express.static(__dirname));
 app.get('/controller.js', function(req, res){
-  var browserify = require('browserify');
+
   browserify()
     .add(require('es6ify').runtime)
-     // compile all .js files except the ones coming from node_modules
     // .transform(require('brfs'))
     .transform(require('es6ify').configure(/^(?!.*node_modules)+.+\.js$/))
     .require(require.resolve('./controller.js'), { entry: true })
@@ -19,12 +17,8 @@ app.get('/controller.js', function(req, res){
 });
 
 app.get('/index.js', function(req, res){
-  var browserify = require('browserify');
   browserify()
-    // .add(require('es6ify').runtime)
-     // compile all .js files except the ones coming from node_modules
     .transform(require('brfs'))
-    // .transform(require('es6ify').configure(/^(?!.*node_modules)+.+\.js$/))
     .require(require.resolve('./index.js'), { entry: true })
     .bundle({ debug: true })
     .pipe(res);
@@ -52,17 +46,5 @@ var slideshowSock = shoe(function(stream){
     console.log('slideshow', data, pin);
   });
 });
-
-// var controllerSock = shoe(function (stream) {
-//   stream.on('data', function(data){
-//     streams.forEach(function(stream){
-//       stream.write(data);
-//     });
-//
-//     console.log(data);
-//   });
-//   stream.pipe(slideshowSock);
-// });
-// controllerSock.install(server, '/controller');
 
 slideshowSock.install(server, '/slideshow');

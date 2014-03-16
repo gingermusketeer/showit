@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "supervisor server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,14 +12,13 @@
   "dependencies": {
     "remark": "git://github.com/gnab/remark.git#b4eddc498625e8c6392b550881f2b78c0fa11d4a",
     "brfs": "~1.0.0",
-    "ecstatic": "~0.4.13",
     "shoe": "0.0.15",
-    "through": "~2.3.4",
-    "routes-router": "~1.5.4",
-    "serve-browserify": "~0.3.3",
     "express": "~3.5.0",
     "browserify-middleware": "~2.3.0",
     "hammerjs": "~1.0.7",
-    "debounce": "0.0.3"
+    "debounce": "0.0.3",
+    "es6ify": "^0.4.8",
+    "supervisor": "^0.5.7",
+    "browserify": "^3.32.1"
   }
 }
