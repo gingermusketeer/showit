@@ -7,23 +7,17 @@ class: center, middle
 Max Brosnahan @ CHC.js
 
 ---
-layout: false
-# Contents
+layout:false
 
-- What
-- Why
-- How
-- Demo
-- Useful libraries
- - Minification
-  - Angular?
-
----
 # Browserify?
 
  Client side javascript dependency management tool
 
 - Think require.js
+
+---
+# Differences to require.js
+- Always in 'production'
 
 ---
 # Browserify?
@@ -41,6 +35,30 @@ layout: false
 ```
 ---
 # Transforms
+
+- brfs
+- es6ify
+- debowerify
+- envify
+- uglifyify
+
+---
+# Transforms - coffeescript
+```js
+var coffee = require('coffee-script');
+var through = require('through');
+
+b.transform(function (file) {
+    var data = '';
+    return through(write, end);
+
+    function write (buf) { data += buf }
+    function end () {
+        this.queue(coffee.compile(data));
+        this.queue(null);
+    }
+});
+```
 ---
 # Multiple bundles
 ---
@@ -53,10 +71,6 @@ layout: false
 ---
 #CDNs
 http://wzrd.in/
----
-# Summary
-
-
 ---
 layout: true
 class: center, middle
