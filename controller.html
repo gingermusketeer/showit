@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html style="width: 100%; height:100%">
+<html>
   <head>
     <title>My Awesome Presentation Controller</title>
-    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
+    <style>
+      p {
+        font-size: 60pt;
+        margin-top: 30px;
+        margin-bottom: 0;
+        text-align: center;
+      }
+    </style>
   </head>
-  <body style="width: 100%; height:100%">
-    <div id="container" style="width: 100%; height:100%">
-    </div>
+  <body id="container">
+    <p>
+      Swipe <br>&lt;--&gt; <br>to change slides
+    </p>
     <script type="text/javascript" src="controller.js"></script>
   </body>
 </html>
