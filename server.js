@@ -31,7 +31,9 @@ app.get('/index.js', function(req, res){
 });
 
 
-var server  = app.listen(4000);
+var server  = app.listen(4000, function(){
+  console.log('Server started on: ' + 4000);
+});
 var streams = {};
 var slideshowSock = shoe(function(stream){
   var pin;
