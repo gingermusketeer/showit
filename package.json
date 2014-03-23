@@ -1,13 +1,14 @@
 {
   "name": "showit",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "slideshow server",
+  "main": "server.js",
   "scripts": {
     "start": "supervisor server.js",
+    "open": "open http://localhost:4000 && open http://localhost:4000/controller.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Max Brosnahan",
   "license": "ISC",
   "dependencies": {
     "remark": "git://github.com/gnab/remark.git#b4eddc498625e8c6392b550881f2b78c0fa11d4a",
@@ -22,5 +23,14 @@
     "browserify": "^3.32.1",
     "envify": "^1.2.1",
     "through": "^2.3.4"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gingermusketeer/showit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gingermusketeer/showit/issues"
+  },
+  "homepage": "https://github.com/gingermusketeer/showit"
 }
