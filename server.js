@@ -3,6 +3,10 @@ var browserify = require('browserify');
 var es6ify = require('es6ify');
 var express = require('express');
 var app = express();
+var path = require('path');
+
+var pathToSlides = path.resolve(process.cwd(), process.argv[2] || 'slides.md');
+console.log('Showing slides at: ' + pathToSlides);
 
 app.use(app.router);
 app.use(express.static(__dirname));
@@ -10,8 +14,8 @@ app.get('/controller.js', function(req, res){
 
   browserify()
     .add(es6ify.runtime)
-    // .transform(require('brfs'))
     .transform(require('es6ify').configure(/^(?!.*node_modules)+.+\.js$/))
+    .transform(require('brfs'))
     .require(require.resolve('./controller.js'), { entry: true })
     .bundle({ debug: true })
     .pipe(res);
@@ -21,6 +25,7 @@ app.get('/index.js', function(req, res){
   browserify()
     .add(es6ify.runtime)
     .transform(require('es6ify').configure(/^(?!.*node_modules)+.+\.js$/))
+    .transform(require('envify/custom')({PATH_TO_SLIDES: pathToSlides}))
     .transform(require('brfs'))
     .require(require.resolve('./index.js'), { entry: true })
     .bundle({ debug: true })
