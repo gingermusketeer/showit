@@ -18,6 +18,10 @@ layout:false
 ---
 # Differences to require.js
 - Always in 'production'
+- Simpler
+- Encourages modularity
+- Share code (node backend)
+- npm for the win!
 
 ---
 # Browserify?
@@ -28,12 +32,6 @@ layout:false
 - always in production*
 
 ---
-# Under the hood
-
-```js
-
-```
----
 # Transforms
 
 - brfs
@@ -41,6 +39,7 @@ layout:false
 - debowerify
 - envify
 - uglifyify
+- cssify
 
 ---
 # Transforms - coffeescript
@@ -60,17 +59,15 @@ b.transform(function (file) {
 });
 ```
 ---
-# Multiple bundles
----
-# Working with existing tooling
-##no module system
+# Misc
 
-##require.js
----
-#shims
----
-#CDNs
-http://wzrd.in/
+- Multiple bundles
+- Can be used in conjunction with
+ - normal script tags
+ - require.js
+- shims
+- CDNs
+ - http://wzrd.in/
 ---
 layout: true
 class: center, middle
