@@ -20,6 +20,7 @@
     "es6ify": "^0.4.8",
     "supervisor": "^0.5.7",
     "browserify": "^3.32.1",
-    "envify": "^1.2.1"
+    "envify": "^1.2.1",
+    "through": "^2.3.4"
   }
 }
